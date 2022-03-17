@@ -1,0 +1,5 @@
+BEGIN;
+
+ALTER TABLE collectible ADD COLUMN IF NOT EXISTS token_owner text DEFAULT NULL;
+
+COMMIT;

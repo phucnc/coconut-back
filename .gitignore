@@ -1,0 +1,25 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Go template
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+main-local.go
+local.sh
+gen_go_bindings
+
+# Test binary, built with `go test-files -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+.idea
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+credentials
+*.png

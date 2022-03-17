@@ -1,0 +1,7 @@
+BEGIN ;
+
+ALTER TABLE collectible ADD COLUMN IF NOT EXISTS total_like int  NOT NULL DEFAULT 0;
+ALTER TABLE collectible ADD COLUMN IF NOT EXISTS total_trade int  NOT NULL DEFAULT 0;
+
+
+COMMIT;

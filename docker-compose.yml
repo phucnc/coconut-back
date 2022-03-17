@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  nft-backend:
+    container_name: nft-backend
+    build:
+      .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./credentials:/src/credentials
+      - ./migrations:/src/migrations
+    networks:
+      - database
+    environment:
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_USR=techiast
+      - PG_PWD=sh@techiast
+      - PG_DB=nft
+      - PG_SSL_MODE=disable
+      - BUCKET_NAME=nft-storage
+      - BACKEND_PORT=:8000
+      - CREDENTIAL_FILE=./credentials/gcloud-storage.json
+      - NFT_CONTRACT_ADDRESS=0xa042E690a4D68bd9D291d26231421392A6CB9F11
+      - NFT_EXCHANGE_CONTRACT_ADDRESS=0xA405A399Ef18595b2349Bf36763080104f1594fA
+
+networks:
+  database:
+    external: true

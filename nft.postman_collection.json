@@ -1,0 +1,813 @@
+{
+	"info": {
+		"_postman_id": "b0eeeaa5-1341-4ebf-bef8-ede430b7ebe1",
+		"name": "nft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create nft",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "test-title",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test-description",
+							"type": "text"
+						},
+						{
+							"key": "royalty_percent",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "unlock_once_purchased",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "upload_file",
+							"type": "file",
+							"src": "ZBGWAKhV2/fancygopher.jpg"
+						},
+						{
+							"key": "categories",
+							"value": "art",
+							"type": "text"
+						},
+						{
+							"key": "categories",
+							"value": "game",
+							"type": "text"
+						},
+						{
+							"key": "instant_sale_price",
+							"value": "16",
+							"type": "text"
+						},
+						{
+							"key": "quote_token",
+							"value": "BMP",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://nft.techiast.com/nft",
+					"protocol": "http",
+					"host": [
+						"nft",
+						"techiast",
+						"com"
+					],
+					"path": [
+						"nft"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create nft",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test-title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test-description",
+									"type": "text"
+								},
+								{
+									"key": "royalty_percent",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "unlock_once_purchased",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "upload_file",
+									"type": "file",
+									"src": "ZBGWAKhV2/fancygopher.jpg"
+								},
+								{
+									"key": "categories",
+									"value": "art",
+									"type": "text"
+								},
+								{
+									"key": "categories",
+									"value": "game",
+									"type": "text"
+								},
+								{
+									"key": "instant_sale_price",
+									"value": "16",
+									"type": "text"
+								},
+								{
+									"key": "quote_token",
+									"value": "BMP",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://nft.techiast.com/nft",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 16:07:14 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2a3e7aed-8c0c-44ab-b300-2f6d9d43ebaf\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get nft",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://nft.techiast.com/nft?id=17896af2-bc3e-466d-9ab0-10dd13c3efd7",
+					"protocol": "http",
+					"host": [
+						"nft",
+						"techiast",
+						"com"
+					],
+					"path": [
+						"nft"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "17896af2-bc3e-466d-9ab0-10dd13c3efd7"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get nft",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nft.techiast.com/nft?id=17896af2-bc3e-466d-9ab0-10dd13c3efd7",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "17896af2-bc3e-466d-9ab0-10dd13c3efd7"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "323"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 17:13:51 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"17896af2-bc3e-466d-9ab0-10dd13c3efd7\",\n    \"title\": \"test-title\",\n    \"description\": \"test-description\",\n    \"upload_file\": \"https://storage.googleapis.com/nft-storage/5ea3681e-de1f-4c2f-9b9d-6f7a4ce48432.png\",\n    \"royalty_percent\": \"30\",\n    \"unlock_once_purchased\": true,\n    \"instant_sale_price\": \"16\",\n    \"categories\": [\n        \"art\",\n        \"game\"\n    ],\n    \"properties\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Paging",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://nft.techiast.com/nft/collectible-paging?cursor=&limit=2&sort=desc&filter=created-date&title=test",
+					"protocol": "http",
+					"host": [
+						"nft",
+						"techiast",
+						"com"
+					],
+					"path": [
+						"nft",
+						"collectible-paging"
+					],
+					"query": [
+						{
+							"key": "cursor",
+							"value": ""
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "sort",
+							"value": "desc"
+						},
+						{
+							"key": "filter",
+							"value": "created-date"
+						},
+						{
+							"key": "title",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Paging",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nft.techiast.com/nft/collectible-paging?cursor=28014e8d-defd-43c5-af55-ba30318f289b&limit=2&sort=desc&filter=created-date",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft",
+								"collectible-paging"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "28014e8d-defd-43c5-af55-ba30318f289b"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								},
+								{
+									"key": "filter",
+									"value": "created-date"
+								},
+								{
+									"key": "categories",
+									"value": "art",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "892"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 16:08:17 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"collectibles\": [\n        {\n            \"id\": \"2a3e7aed-8c0c-44ab-b300-2f6d9d43ebaf\",\n            \"title\": \"test-title\",\n            \"description\": \"test-description\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/56fb5568-5d93-40ac-a920-d12981573b37.jpg\",\n            \"royalties\": \"0.3\",\n            \"instant_sale_price\": \"16\",\n            \"unlock_once_purchased\": true,\n            \"properties\": null,\n            \"token\": null,\n            \"token_id\": null,\n            \"token_owner\": null,\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"game\"\n                },\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        },\n        {\n            \"id\": \"28014e8d-defd-43c5-af55-ba30318f289b\",\n            \"title\": \"Cute bear\",\n            \"description\": \"babyboo\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/3c6ac802-e4fa-488e-8dc4-47533ec2edde.gif\",\n            \"royalties\": \"0.1\",\n            \"instant_sale_price\": \"0.3\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": null,\n            \"token_id\": null,\n            \"token_owner\": null,\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        }\n    ],\n    \"prev_cursor\": \"\",\n    \"next_cursor\": \"28014e8d-defd-43c5-af55-ba30318f289b\"\n}"
+				},
+				{
+					"name": "Paging",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nft.techiast.com/nft/collectible-paging?cursor=28014e8d-defd-43c5-af55-ba30318f289b&limit=2&sort=desc&filter=created-date",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft",
+								"collectible-paging"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "28014e8d-defd-43c5-af55-ba30318f289b"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								},
+								{
+									"key": "filter",
+									"value": "created-date"
+								},
+								{
+									"key": "categories",
+									"value": "art",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1092"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 16:08:59 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"collectibles\": [\n        {\n            \"id\": \"f595134e-eb22-4c11-a38e-b41550423c23\",\n            \"title\": \"TT-Test-07\",\n            \"description\": \"TT-Test-07\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/f44a7938-4d3b-45bc-81cc-834d11b5b486.mp4\",\n            \"royalties\": \"0.1\",\n            \"instant_sale_price\": \"2\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": \"0x1aba247b16f62686e8ca9e036ee031174833cf5f9111ec7fe46c2c7a270497aa\",\n            \"token_id\": \"33\",\n            \"token_owner\": \"0x177E42b7A1a124DaC17B61E1f9A30e3121067eF4\",\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"memes\"\n                },\n                {\n                    \"name\": \"photography\"\n                },\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        },\n        {\n            \"id\": \"a13c107f-89cc-42ac-b6f6-35b1d6240e58\",\n            \"title\": \"TT-Test-06\",\n            \"description\": \"TT-Test-06\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/3c8b7af3-20d9-4835-986c-8260cf45d8e5.mp4\",\n            \"royalties\": \"0.1\",\n            \"instant_sale_price\": \"1\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": null,\n            \"token_id\": null,\n            \"token_owner\": null,\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"memes\"\n                },\n                {\n                    \"name\": \"photography\"\n                },\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        }\n    ],\n    \"prev_cursor\": \"28014e8d-defd-43c5-af55-ba30318f289b\",\n    \"next_cursor\": \"a13c107f-89cc-42ac-b6f6-35b1d6240e58\"\n}"
+				},
+				{
+					"name": "Paging with categories",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nft.techiast.com/nft/collectible-paging?cursor=28014e8d-defd-43c5-af55-ba30318f289b&limit=2&sort=desc&filter=created-date&categories=art",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft",
+								"collectible-paging"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "28014e8d-defd-43c5-af55-ba30318f289b"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								},
+								{
+									"key": "filter",
+									"value": "created-date"
+								},
+								{
+									"key": "categories",
+									"value": "art"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1092"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 16:09:25 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"collectibles\": [\n        {\n            \"id\": \"f595134e-eb22-4c11-a38e-b41550423c23\",\n            \"title\": \"TT-Test-07\",\n            \"description\": \"TT-Test-07\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/f44a7938-4d3b-45bc-81cc-834d11b5b486.mp4\",\n            \"royalties\": \"0.1\",\n            \"instant_sale_price\": \"2\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": \"0x1aba247b16f62686e8ca9e036ee031174833cf5f9111ec7fe46c2c7a270497aa\",\n            \"token_id\": \"33\",\n            \"token_owner\": \"0x177E42b7A1a124DaC17B61E1f9A30e3121067eF4\",\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"memes\"\n                },\n                {\n                    \"name\": \"photography\"\n                },\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        },\n        {\n            \"id\": \"a13c107f-89cc-42ac-b6f6-35b1d6240e58\",\n            \"title\": \"TT-Test-06\",\n            \"description\": \"TT-Test-06\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/3c8b7af3-20d9-4835-986c-8260cf45d8e5.mp4\",\n            \"royalties\": \"0.1\",\n            \"instant_sale_price\": \"1\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": null,\n            \"token_id\": null,\n            \"token_owner\": null,\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"memes\"\n                },\n                {\n                    \"name\": \"photography\"\n                },\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        }\n    ],\n    \"prev_cursor\": \"28014e8d-defd-43c5-af55-ba30318f289b\",\n    \"next_cursor\": \"a13c107f-89cc-42ac-b6f6-35b1d6240e58\"\n}"
+				},
+				{
+					"name": "Paging with categories",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nft.techiast.com/nft/collectible-paging?cursor=&limit=2&sort=desc&filter=created-date&categories=art",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft",
+								"collectible-paging"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								},
+								{
+									"key": "filter",
+									"value": "created-date"
+								},
+								{
+									"key": "categories",
+									"value": "art"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "892"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 16:09:55 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"collectibles\": [\n        {\n            \"id\": \"2a3e7aed-8c0c-44ab-b300-2f6d9d43ebaf\",\n            \"title\": \"test-title\",\n            \"description\": \"test-description\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/56fb5568-5d93-40ac-a920-d12981573b37.jpg\",\n            \"royalties\": \"0.3\",\n            \"instant_sale_price\": \"16\",\n            \"unlock_once_purchased\": true,\n            \"properties\": null,\n            \"token\": null,\n            \"token_id\": null,\n            \"token_owner\": null,\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"game\"\n                },\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        },\n        {\n            \"id\": \"28014e8d-defd-43c5-af55-ba30318f289b\",\n            \"title\": \"Cute bear\",\n            \"description\": \"babyboo\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/3c6ac802-e4fa-488e-8dc4-47533ec2edde.gif\",\n            \"royalties\": \"0.1\",\n            \"instant_sale_price\": \"0.3\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": null,\n            \"token_id\": null,\n            \"token_owner\": null,\n            \"quote_token\": {\n                \"name\": \"BMP\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        }\n    ],\n    \"prev_cursor\": \"\",\n    \"next_cursor\": \"28014e8d-defd-43c5-af55-ba30318f289b\"\n}"
+				},
+				{
+					"name": "Paging with search name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nft.techiast.com/nft/collectible-paging?cursor=&limit=2&sort=desc&filter=created-date&categories=art&title=test",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft",
+								"collectible-paging"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								},
+								{
+									"key": "filter",
+									"value": "created-date"
+								},
+								{
+									"key": "categories",
+									"value": "art"
+								},
+								{
+									"key": "title",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "540"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 May 2021 15:57:30 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"collectibles\": [\n        {\n            \"id\": \"9d6cf4d6-c515-41b0-ae95-bcef3cd143cf\",\n            \"title\": \"Test CONT\",\n            \"description\": \"\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/4b7058cb-95b3-40df-a3fd-61a017304e11.gif\",\n            \"royalties\": \"0\",\n            \"instant_sale_price\": \"0.01\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": \"0xcf65db9275cde9694e9ce70991bc14af4b4b90c2739ed6ad54fa12d580fe704e\",\n            \"token_id\": \"113\",\n            \"token_owner\": \"0xaaba1aAa4330105072c1032C6220E06F259d0b48\",\n            \"quote_token\": {\n                \"name\": \"CONT\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        }\n    ],\n    \"prev_cursor\": \"\",\n    \"next_cursor\": \"\"\n}"
+				},
+				{
+					"name": "Paging with search name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nft.techiast.com/nft/collectible-paging?cursor=&limit=2&sort=desc&filter=created-date&title=test",
+							"protocol": "http",
+							"host": [
+								"nft",
+								"techiast",
+								"com"
+							],
+							"path": [
+								"nft",
+								"collectible-paging"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								},
+								{
+									"key": "filter",
+									"value": "created-date"
+								},
+								{
+									"key": "title",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1072"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 May 2021 15:59:55 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"collectibles\": [\n        {\n            \"id\": \"4da02f1d-fda9-437c-be74-723258d731b8\",\n            \"title\": \"Test CONT\",\n            \"description\": \"\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/572eebc7-cf9a-4221-8fcc-da37cbfacc70.gif\",\n            \"royalties\": \"0\",\n            \"instant_sale_price\": \"0.01\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": \"0x12bc3b8e002d51433dbcdf7e41507b50ad3e4bba0c4d3e8d971da57445d6251e\",\n            \"token_id\": \"114\",\n            \"token_owner\": \"0x6A439c2849DcBd57c38f94dFf03710627a4840B1\",\n            \"quote_token\": {\n                \"name\": \"CONT\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"photography\"\n                }\n            ]\n        },\n        {\n            \"id\": \"9d6cf4d6-c515-41b0-ae95-bcef3cd143cf\",\n            \"title\": \"Test CONT\",\n            \"description\": \"\",\n            \"upload_file\": \"https://storage.googleapis.com/nft-storage/4b7058cb-95b3-40df-a3fd-61a017304e11.gif\",\n            \"royalties\": \"0\",\n            \"instant_sale_price\": \"0.01\",\n            \"unlock_once_purchased\": false,\n            \"properties\": null,\n            \"token\": \"0xcf65db9275cde9694e9ce70991bc14af4b4b90c2739ed6ad54fa12d580fe704e\",\n            \"token_id\": \"113\",\n            \"token_owner\": \"0xaaba1aAa4330105072c1032C6220E06F259d0b48\",\n            \"quote_token\": {\n                \"name\": \"CONT\"\n            },\n            \"categories\": [\n                {\n                    \"name\": \"art\"\n                }\n            ]\n        }\n    ],\n    \"prev_cursor\": \"\",\n    \"next_cursor\": \"9d6cf4d6-c515-41b0-ae95-bcef3cd143cf\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Total sold",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://nft.techiast.com/exchange/total-sold?duration=24h&quote_token=0",
+					"protocol": "http",
+					"host": [
+						"nft",
+						"techiast",
+						"com"
+					],
+					"path": [
+						"exchange",
+						"total-sold"
+					],
+					"query": [
+						{
+							"key": "duration",
+							"value": "24h"
+						},
+						{
+							"key": "quote_token",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://nft.techiast.com/nft/collectible-search?name=test&limit=2",
+					"protocol": "http",
+					"host": [
+						"nft",
+						"techiast",
+						"com"
+					],
+					"path": [
+						"nft",
+						"collectible-search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

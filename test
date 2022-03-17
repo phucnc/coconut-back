@@ -1,0 +1,16 @@
+#!/bin/bash
+
+go clean -testcache
+
+PG_HOST=localhost \
+PG_PORT=9000 \
+PG_USR=techiast \
+PG_PWD=sh@techiast \
+PG_DB=nft \
+BUCKET_NAME=nft-storage-test \
+CREDENTIAL_FILE=../../credentials/gcloud-storage.json \
+BACKEND_PORT=:12000 \
+/home/sonhuynh/go/bin/gotest ./internal/repositories -v
+
+#/home/sonhuynh/go/bin/gotest ./... -v
+#/home/sonhuynh/go/bin/gotest ./internal/services -v

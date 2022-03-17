@@ -1,0 +1,9 @@
+#!/bin/bash
+
+scp -r ./main.go sysadmin@34.87.146.154:/home/sysadmin/techiast/nft-backend
+scp -r ./go.mod sysadmin@34.87.146.154:/home/sysadmin/techiast/nft-backend
+scp -r ./Dockerfile sysadmin@34.87.146.154:/home/sysadmin/techiast/nft-backend
+scp -r ./contracts sysadmin@34.87.146.154:/home/sysadmin/techiast/nft-backend
+scp -r ./internal sysadmin@34.87.146.154:/home/sysadmin/techiast/nft-backend
+scp -r ./postgres sysadmin@34.87.146.154:/home/sysadmin/techiast/nft-backend
+scp -r ./migrations sysadmin@34.87.146.154:/home/sysadmin/techiast/nft-backend

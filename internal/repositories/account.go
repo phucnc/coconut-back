@@ -171,7 +171,7 @@ func (r *AccountRepository) Update(ctx context.Context, db database.QueryExecer,
 		SET
 			%s = $1 , %s = $2
 		WHERE
-			%s = $3
+			lower(%s) = lower($3)
 		`
 	stmt = fmt.Sprintf(
 		stmt,

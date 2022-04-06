@@ -242,7 +242,7 @@ func (r *AccountRepository) UpdateCover(ctx context.Context, db database.QueryEx
 		SET
 			%s = $1
 		WHERE
-			%s = $2
+			lower(%s) = lower($2)
 		`
 	stmt = fmt.Sprintf(
 		stmt,

@@ -15,6 +15,6 @@ INSERT INTO token
 VALUES
     ('BNB'),
     ('BUSD'),
-    ('CONT');
+    ('CONUT');
 
 COMMIT;

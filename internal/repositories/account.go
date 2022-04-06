@@ -213,7 +213,7 @@ func (r *AccountRepository) UpdateAvatar(ctx context.Context, db database.QueryE
 		SET
 			%s = $1 
 		WHERE
-			%s = $2
+			lower(%s) = lower($2)
 		`
 	stmt = fmt.Sprintf(
 		stmt,

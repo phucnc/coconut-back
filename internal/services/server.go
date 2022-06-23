@@ -119,6 +119,14 @@ type ApiServer struct {
 		Paging(ctx context.Context, db database.QueryExecer, paging *repositories.NoticePaging) ([]*entities.Notice, error)
 	}
 
+	BannerRepo interface {
+		Get(ctx context.Context, db database.QueryExecer, id int64) (*entities.Banner, error)
+		Insert(ctx context.Context, db database.QueryExecer, trend *entities.Banner) error
+		Update(ctx context.Context, db database.QueryExecer, id int64, event *entities.Banner) error
+		Delete(ctx context.Context, db database.QueryExecer, id int64) error
+		Paging(ctx context.Context, db database.QueryExecer, paging *repositories.BannerPaging) ([]*entities.Banner, error)
+	}
+
 	KYCRepo interface {
 		Insert(ctx context.Context, db database.QueryExecer, kyc *entities.KYC) error
 	}
@@ -147,6 +155,7 @@ func NewServer(ctx context.Context, addr string, zapLogger *zap.Logger, pg *post
 		EventRepo:               &repositories.EventRepo{},
 		NoticeRepo:              &repositories.NoticeRepo{},
 		KYCRepo:                 &repositories.KYCRepository{},
+		BannerRepo:              &repositories.BannerRepository{},
 	}
 
 	r := mux.NewRouter()
@@ -181,6 +190,8 @@ func NewServer(ctx context.Context, addr string, zapLogger *zap.Logger, pg *post
 	r.HandleFunc("/notice", enableCORS(apiServer.handleNoticePath()))
 	r.HandleFunc("/notice/paging", enableCORS(apiServer.NoticePages))
 	r.HandleFunc("/kyc", enableCORS(apiServer.handleKYCPath()))
+	r.HandleFunc("/banner", enableCORS(apiServer.handleBannerPath()))
+	r.HandleFunc("/banner/paging", enableCORS(apiServer.BannerPages))
 
 	httpServer.Handler = r
 

@@ -20,6 +20,6 @@ CREATE TABLE IF NOT EXISTS account (
 ALTER TABLE account ADD PRIMARY KEY (id);
 CREATE INDEX IF NOT EXISTS account_username ON account (username);
 CREATE INDEX IF NOT EXISTS account_address ON account (address);
-ALTER TABLE account ADD CONSTRAINT account_username_check CHECK ( username = lower(username) );
+/*ALTER TABLE account ADD CONSTRAINT account_username_check CHECK ( username = lower(username) );*/
 
 COMMIT;

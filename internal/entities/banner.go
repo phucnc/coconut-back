@@ -29,7 +29,7 @@ names := make([]string, len(c), 0)
 //}
 
 type Banner struct {
-	Id        int64      `json:"-"`
+	Id        int64      `json:"id"`
 	Name      string     `json:"name"`
 	Link      string     `json:"link"`
 	Status    int        `json:"status"`

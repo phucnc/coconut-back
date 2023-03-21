@@ -5,10 +5,6 @@ import (
 	"embed"
 	_ "embed"
 	"fmt"
-	"github.com/gofrs/uuid"
-	"github.com/gorilla/mux"
-	"github.com/shopspring/decimal"
-	"go.uber.org/zap"
 	"html/template"
 	"log"
 	"net/http"
@@ -18,6 +14,11 @@ import (
 	"nft-backend/postgres"
 	"os"
 	"time"
+
+	"github.com/gofrs/uuid"
+	"github.com/gorilla/mux"
+	"github.com/shopspring/decimal"
+	"go.uber.org/zap"
 )
 
 type ApiServer struct {
@@ -38,6 +39,8 @@ type ApiServer struct {
 		GetTotalInDuration(ctx context.Context, db database.QueryExecer, duration time.Duration) (decimal.Decimal, error)
 		Check(ctx context.Context, db database.QueryExecer, id uuid.UUID) (bool, error)
 		UpdateView(ctx context.Context, db database.QueryExecer, collectible_id int64) error
+		UpdateFakView(ctx context.Context, db database.QueryExecer, collectible_id int64, count uint64) error
+		UpdateFakLike(ctx context.Context, db database.QueryExecer, collectible_id int64, count uint64) error
 		UpdateResell(ctx context.Context, db database.QueryExecer, collectible_id int64, price decimal.Decimal, quote_token int32) error
 		Delete(ctx context.Context, db database.QueryExecer, collectible_id int64) error
 		Block(ctx context.Context, db database.QueryExecer, collectible_id int64) error
@@ -164,6 +167,7 @@ func NewServer(ctx context.Context, addr string, zapLogger *zap.Logger, pg *post
 	r.HandleFunc("/test-files/upload", enableCORS(apiServer.uploadTemplate))
 	r.HandleFunc("/nft", enableCORS(apiServer.handleCollectiblePath()))
 	r.HandleFunc("/nft/like", enableCORS(apiServer.Like()))
+	r.HandleFunc("/nft/fak-like", enableCORS(apiServer.FakLike()))
 	r.HandleFunc("/nft/block", enableCORS(apiServer.BlockCollective()))
 	r.HandleFunc("/nft/total-mint", enableCORS(apiServer.TotalMint()))
 	r.HandleFunc("/nft/collectible-search", enableCORS(apiServer.GetByName()))
@@ -175,6 +179,7 @@ func NewServer(ctx context.Context, addr string, zapLogger *zap.Logger, pg *post
 	r.HandleFunc("/account/avatar", enableCORS(apiServer.Avatar()))
 	r.HandleFunc("/comment", enableCORS(apiServer.handleCommentPath()))
 	r.HandleFunc("/view", enableCORS(apiServer.View()))
+	r.HandleFunc("/fak-view", enableCORS(apiServer.FakView()))
 	r.HandleFunc("/status", enableCORS(apiServer.Status()))
 	r.HandleFunc("/report", enableCORS(apiServer.handleReportPath()))
 	r.HandleFunc("/account/search-paging", enableCORS(apiServer.AccountSearchPaging))

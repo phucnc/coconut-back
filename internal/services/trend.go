@@ -6,8 +6,10 @@ import (
 	//"context"
 	"encoding/json"
 	"fmt"
-	"github.com/gofrs/uuid"
 	"strconv"
+
+	"github.com/gofrs/uuid"
+
 	//"github.com/gorilla/mux"
 	//"github.com/jackc/pgx/v4"
 	//"github.com/pkg/errors"
@@ -180,7 +182,8 @@ func (s *ApiServer) GetTrend(w http.ResponseWriter, r *http.Request) {
 				s.zapLogger.Sugar().Error(err)
 				liked = false
 			}
-			total := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible.Id)
+			// total := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible.Id)
+			total := collectible.TotoalLike
 
 			like := &entities.CollectibleLikeResp{
 				Liked: liked,

@@ -1,9 +1,10 @@
 package entities
 
 import (
+	"time"
+
 	"github.com/gofrs/uuid"
 	"github.com/shopspring/decimal"
-	"time"
 )
 
 const (
@@ -20,6 +21,7 @@ const (
 	Collectible_TokenOwner          = "token_owner"
 	Collectible_Creator             = "creator"
 	Collectible_View                = "view"
+	Collectible_TotalLike           = "total_like"
 	Collectible_Status              = "status"
 	Collectible_Token               = "token"
 	Collectible_QuoteTokenId        = "quote_token_id"
@@ -39,6 +41,7 @@ type Collectible struct {
 	UnlockOncePurchased bool                `json:"unlock_once_purchased"`
 	Properties          map[string]string   `json:"properties"`
 	View                int                 `json:"view"`
+	TotoalLike          int                 `json:"total_like"`
 	Token               *string             `json:"token"`
 	TokenId             decimal.NullDecimal `json:"token_id"`
 	TokenOwner          *string             `json:"token_owner"`
@@ -71,6 +74,7 @@ func (e *Collectible) FieldMap(names ...string) map[string]interface{} {
 		Collectible_Properties:          &e.Properties,
 		Collectible_Creator:             &e.Creator,
 		Collectible_View:                &e.View,
+		Collectible_TotalLike:           &e.TotoalLike,
 		Collectible_Status:              &e.Status,
 		Collectible_CreatedAt:           &e.CreatedAt,
 		Collectible_UpdatedAt:           &e.UpdatedAt,
@@ -102,6 +106,7 @@ func (e *Collectible) FieldsAndValues(names ...string) ([]string, []interface{})
 		Collectible_TokenOwner,
 		Collectible_Creator,
 		Collectible_View,
+		Collectible_TotalLike,
 		Collectible_Status,
 		Collectible_Token,
 		Collectible_CreatedAt,
@@ -122,6 +127,7 @@ func (e *Collectible) FieldsAndValues(names ...string) ([]string, []interface{})
 		&e.TokenOwner,
 		&e.Creator,
 		&e.View,
+		&e.TotoalLike,
 		&e.Status,
 		&e.Token,
 		&e.CreatedAt,

@@ -3,15 +3,16 @@ package repositories
 import (
 	"context"
 	"fmt"
-	"github.com/gofrs/uuid"
-	"github.com/jackc/pgx/v4"
-	"github.com/pkg/errors"
-	"github.com/shopspring/decimal"
 	"nft-backend/internal/database"
 	"nft-backend/internal/entities"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gofrs/uuid"
+	"github.com/jackc/pgx/v4"
+	"github.com/pkg/errors"
+	"github.com/shopspring/decimal"
 )
 
 type CollectibleRepository struct {
@@ -777,7 +778,35 @@ func (r *CollectibleRepository) UpdateView(ctx context.Context, db database.Quer
 	return nil
 }
 
-func (r *CollectibleRepository) UpdateTotalLike(ctx context.Context, db database.QueryExecer, id int64, total_like int) error {
+func (r *CollectibleRepository) UpdateFakView(ctx context.Context, db database.QueryExecer, id int64, count uint64) error {
+	collectible := &entities.Collectible{}
+
+	stmt :=
+		`
+		UPDATE
+			%s
+		SET
+			view = $1 
+		WHERE
+			id = $2
+		`
+
+	stmt = fmt.Sprintf(
+		stmt,
+		collectible.TableName(),
+	)
+
+	cmd, err := db.Exec(ctx, stmt, count, id)
+	if err != nil {
+		return err
+	}
+	if cmd.RowsAffected() < 1 {
+		return errors.New("update affected no row")
+	}
+	return nil
+}
+
+func (r *CollectibleRepository) UpdateFakLike(ctx context.Context, db database.QueryExecer, id int64, count uint64) error {
 	collectible := &entities.Collectible{}
 
 	stmt :=
@@ -795,7 +824,48 @@ func (r *CollectibleRepository) UpdateTotalLike(ctx context.Context, db database
 		collectible.TableName(),
 	)
 
-	cmd, err := db.Exec(ctx, stmt, total_like, id)
+	cmd, err := db.Exec(ctx, stmt, count, id)
+	if err != nil {
+		return err
+	}
+	if cmd.RowsAffected() < 1 {
+		return errors.New("update affected no row")
+	}
+	return nil
+}
+
+func (r *CollectibleRepository) UpdateTotalLike(ctx context.Context, db database.QueryExecer, id int64, isLike bool) error {
+	collectible := &entities.Collectible{}
+	stmt := ""
+
+	if isLike {
+		stmt =
+			`
+		UPDATE
+			%s
+		SET
+			total_like = total_like + 1 
+		WHERE
+			id = $2
+		`
+	} else {
+		stmt =
+			`
+		UPDATE
+			%s
+		SET
+			total_like = total_like - 1 
+		WHERE
+			id = $2
+		`
+	}
+
+	stmt = fmt.Sprintf(
+		stmt,
+		collectible.TableName(),
+	)
+
+	cmd, err := db.Exec(ctx, stmt, id)
 	if err != nil {
 		return err
 	}

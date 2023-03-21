@@ -6,11 +6,6 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"github.com/gofrs/uuid"
-	"github.com/gorilla/mux"
-	"github.com/jackc/pgx/v4"
-	"github.com/pkg/errors"
-	"github.com/shopspring/decimal"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -21,6 +16,12 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gofrs/uuid"
+	"github.com/gorilla/mux"
+	"github.com/jackc/pgx/v4"
+	"github.com/pkg/errors"
+	"github.com/shopspring/decimal"
 )
 
 type CreateCollectibleResponse struct {
@@ -63,11 +64,33 @@ func (s *ApiServer) Like() http.HandlerFunc {
 	}
 }
 
+func (s *ApiServer) FakLike() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodPost:
+			s.UpdateFakLike(w, r)
+		default:
+			w.WriteHeader(http.StatusMethodNotAllowed)
+		}
+	}
+}
+
 func (s *ApiServer) View() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodPost:
 			s.UpdateView(w, r)
+		default:
+			w.WriteHeader(http.StatusMethodNotAllowed)
+		}
+	}
+}
+
+func (s *ApiServer) FakView() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodPost:
+			s.UpdateFakView(w, r)
 		default:
 			w.WriteHeader(http.StatusMethodNotAllowed)
 		}
@@ -648,7 +671,8 @@ func (s *ApiServer) getCollectible(id string) http.HandlerFunc {
 				s.zapLogger.Sugar().Error(err)
 				liked = false
 			}
-			total := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible.Id)
+			// total := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible.Id)
+			total := collectible.TotoalLike
 
 			like := &entities.CollectibleLikeResp{
 				Liked: liked,
@@ -832,7 +856,8 @@ func (s *ApiServer) CollectiblePaging(w http.ResponseWriter, r *http.Request) {
 			s.zapLogger.Sugar().Error(err)
 			liked = false
 		}
-		total := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible.Id)
+		// total := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible.Id)
+		total := collectible.TotoalLike
 
 		like := &entities.CollectibleLikeResp{
 			Liked: liked,
@@ -1091,9 +1116,9 @@ func (s *ApiServer) DoLike(w http.ResponseWriter, r *http.Request) {
 
 		//fmt.Println("%v", notice)
 
-		err = s.NoticeRepo.Insert(r.Context(), s.postgres.Pool, notice)
+		s.NoticeRepo.Insert(r.Context(), s.postgres.Pool, notice)
 
-		if collectblelike_check == true {
+		if collectblelike_check {
 			w.WriteHeader(http.StatusOK)
 			return
 
@@ -1104,8 +1129,8 @@ func (s *ApiServer) DoLike(w http.ResponseWriter, r *http.Request) {
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}
-			total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
-			(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, total_like)
+			// total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
+			(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, true)
 
 			w.WriteHeader(http.StatusOK)
 			return
@@ -1113,15 +1138,15 @@ func (s *ApiServer) DoLike(w http.ResponseWriter, r *http.Request) {
 		}
 
 	} else if action == 0 { //dislike
-		if collectblelike_check == true {
+		if collectblelike_check {
 			err := s.CollectibleLikeRepo.Delete(r.Context(), s.postgres.Pool, collectible_check.Id, account_check.Id)
 			if err != nil {
 				s.zapLogger.Sugar().Warn(err)
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}
-			total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
-			(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, total_like)
+			// total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
+			(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, false)
 
 			w.WriteHeader(http.StatusOK)
 			return
@@ -1192,6 +1217,146 @@ func (s *ApiServer) Delete(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	return
 
+}
+
+func (s *ApiServer) UpdateFakView(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	if err := r.ParseForm(); err != nil {
+		fmt.Fprintf(w, "ParseForm() err: %v", err)
+		return
+	}
+
+	collectible_id := r.Form.Get("collectible_id")
+	/*defer func() {
+		s.zapLogger.Sugar().Infow(
+			r.URL.Path,
+			"method", r.Method,
+			"collectible_id", collectible_id,
+		)
+	}()*/
+	uid, err := uuid.FromString(collectible_id)
+
+	if err != nil {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusBadRequest)
+		if err := (&errResponse{Error: errIdIsNotValid.Error()}).writeResponse(w); err != nil {
+			s.zapLogger.Sugar().Error(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		return
+	}
+
+	count, err := strconv.ParseUint(r.Form.Get("count"), 10, 64)
+	if err != nil || count <= 0 {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusBadRequest)
+		if err := (&errResponse{Error: errIdIsNotValid.Error()}).writeResponse(w); err != nil {
+			s.zapLogger.Sugar().Error(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		return
+	}
+
+	collectible_check, err := s.CollectibleRepo.Get(r.Context(), s.postgres.Pool, uid)
+	if err != nil {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	if collectible_check == nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err := (&errResponse{Error: errCollectibleNotFound.Error()}).writeResponse(w)
+		if err != nil {
+			s.zapLogger.Sugar().Warn(err)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		return
+	}
+
+	err = s.CollectibleRepo.UpdateFakView(r.Context(), s.postgres.Pool, collectible_check.Id, count)
+	if err != nil {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	return
+
+}
+
+func (s *ApiServer) UpdateFakLike(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	if err := r.ParseForm(); err != nil {
+		fmt.Fprintf(w, "ParseForm() err: %v", err)
+		return
+	}
+
+	collectible_id := r.Form.Get("collectible_id")
+	/*defer func() {
+		s.zapLogger.Sugar().Infow(
+			r.URL.Path,
+			"method", r.Method,
+			"collectible_id", collectible_id,
+		)
+	}()*/
+	uid, err := uuid.FromString(collectible_id)
+
+	if err != nil {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusBadRequest)
+		if err := (&errResponse{Error: errIdIsNotValid.Error()}).writeResponse(w); err != nil {
+			s.zapLogger.Sugar().Error(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		return
+	}
+
+	count, err := strconv.ParseUint(r.Form.Get("count"), 10, 64)
+	if err != nil || count <= 0 {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusBadRequest)
+		if err := (&errResponse{Error: errIdIsNotValid.Error()}).writeResponse(w); err != nil {
+			s.zapLogger.Sugar().Error(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		return
+	}
+
+	collectible_check, err := s.CollectibleRepo.Get(r.Context(), s.postgres.Pool, uid)
+	if err != nil {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	if collectible_check == nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err := (&errResponse{Error: errCollectibleNotFound.Error()}).writeResponse(w)
+		if err != nil {
+			s.zapLogger.Sugar().Warn(err)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		return
+	}
+
+	err = s.CollectibleRepo.UpdateFakLike(r.Context(), s.postgres.Pool, collectible_check.Id, count)
+	if err != nil {
+		s.zapLogger.Sugar().Warn(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }
 
 func (s *ApiServer) UpdateView(w http.ResponseWriter, r *http.Request) {

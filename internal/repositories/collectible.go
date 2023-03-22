@@ -846,7 +846,7 @@ func (r *CollectibleRepository) UpdateTotalLike(ctx context.Context, db database
 		SET
 			total_like = total_like + 1 
 		WHERE
-			id = $2
+			id = $1
 		`
 	} else {
 		stmt =
@@ -856,7 +856,7 @@ func (r *CollectibleRepository) UpdateTotalLike(ctx context.Context, db database
 		SET
 			total_like = total_like - 1 
 		WHERE
-			id = $2
+			id = $1
 		`
 	}
 

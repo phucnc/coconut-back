@@ -1091,8 +1091,18 @@ func (s *ApiServer) DoLike(w http.ResponseWriter, r *http.Request) {
 
 	//fmt.Println("total_like", total_like)
 
-	if action == 1 {
-
+	if collectblelike_check {
+		err := s.CollectibleLikeRepo.Delete(r.Context(), s.postgres.Pool, collectible_check.Id, account_check.Id)
+		if err != nil {
+			s.zapLogger.Sugar().Warn(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		// total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
+		(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, false)
+		w.WriteHeader(http.StatusOK)
+		return
+	} else {
 		account_owner, err := s.AccountRepo.GetByAddress(r.Context(), s.postgres.Pool, *collectible_check.TokenOwner)
 		if err != nil {
 			s.zapLogger.Sugar().Warn(err)
@@ -1118,46 +1128,18 @@ func (s *ApiServer) DoLike(w http.ResponseWriter, r *http.Request) {
 
 		s.NoticeRepo.Insert(r.Context(), s.postgres.Pool, notice)
 
-		if collectblelike_check {
-			w.WriteHeader(http.StatusOK)
+		err = s.CollectibleLikeRepo.Insert(r.Context(), s.postgres.Pool, collectible_check.Id, account_check.Id)
+		if err != nil {
+			s.zapLogger.Sugar().Warn(err)
+			w.WriteHeader(http.StatusInternalServerError)
 			return
-
-		} else {
-			err := s.CollectibleLikeRepo.Insert(r.Context(), s.postgres.Pool, collectible_check.Id, account_check.Id)
-			if err != nil {
-				s.zapLogger.Sugar().Warn(err)
-				w.WriteHeader(http.StatusInternalServerError)
-				return
-			}
-			// total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
-			(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, true)
-
-			w.WriteHeader(http.StatusOK)
-			return
-
 		}
+		// total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
+		(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, true)
 
-	} else if action == 0 { //dislike
-		if collectblelike_check {
-			err := s.CollectibleLikeRepo.Delete(r.Context(), s.postgres.Pool, collectible_check.Id, account_check.Id)
-			if err != nil {
-				s.zapLogger.Sugar().Warn(err)
-				w.WriteHeader(http.StatusInternalServerError)
-				return
-			}
-			// total_like := s.CollectibleLikeRepo.Count(r.Context(), s.postgres.Pool, collectible_check.Id)
-			(&repositories.CollectibleRepository{}).UpdateTotalLike(r.Context(), s.postgres.Pool, collectible_check.Id, false)
-
-			w.WriteHeader(http.StatusOK)
-			return
-
-		} else {
-			w.WriteHeader(http.StatusOK)
-			return
-
-		}
+		w.WriteHeader(http.StatusOK)
+		return
 	}
-
 }
 
 func (s *ApiServer) Delete(w http.ResponseWriter, r *http.Request) {
